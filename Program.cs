@@ -9,11 +9,13 @@ namespace DiceGame
     internal class Program
     {
         private static List<Dice> Dices = new List<Dice>();
+
         static void Main(string[] args)
         {
             Dices = GetDices(args); 
             ShowMainMenu(new GameParams(Dices));
         }
+
         public static List<Dice> GetDices(string[] args)
         {
             List<Dice> Dices = new List<Dice>();
@@ -28,6 +30,7 @@ namespace DiceGame
             }
             return Dices;
         }
+
         public static void ShowMainMenu(GameParams Parameters)
         {
             Console.WriteLine("Hello, player, welcome to non-transitive dice game!");
@@ -49,6 +52,7 @@ namespace DiceGame
             }
             ShowWinner(Parameters);
         }
+
         public static int GetPlayerInputNumber(int range, bool isShowingRequired = true)
         {
             for (int i = 0; i < range && isShowingRequired; i++)
@@ -81,6 +85,7 @@ namespace DiceGame
                 }
             }
         }
+
         public static void ShowLotMenu(GameParams Parameters)
         {
             Console.WriteLine("Let's determine who makes the first move.\nI selected a random value in the range 0..1");
@@ -91,12 +96,14 @@ namespace DiceGame
             Parameters.ComputerMovesFirst = PlayerInput == LotDraw.Number ? false : true;
             Console.WriteLine($"Your selection is - {PlayerInput}\nMy selection - {LotDraw.Number} (KEY - {LotDraw.Key})");
         }
+
         public static void ShowComputerDiceSelect(GameParams Parameters)
         {
             Parameters.ComputerDice = Parameters.GetDice(new Random().Next(0, Parameters.RemainingDices.Count));
             Console.WriteLine(Parameters.ComputerMovesFirst ? $"I willmake a first move and select [{Parameters.ComputerDice}] dice." : $"In my turn, I selected [{Parameters.ComputerDice}] dice.");
 
         }
+
         public static void ShowPlayerDiceSelect(GameParams Parameters)
         {
             Console.WriteLine(Parameters.ComputerMovesFirst ? "Now your turn to select your dice:" : "You select your dice first");
@@ -117,6 +124,7 @@ namespace DiceGame
             Console.WriteLine($"The result is {RandomValue.Number} + {PlayerInput} = {index} (mod 6).");
             Console.WriteLine($"Your trow is {Parameters.PlayerResult}");
         }
+
         public static void ShowComputerMoveMenu(GameParams Parameters)
         {
             Console.WriteLine("It is time for my throw");
@@ -129,12 +137,14 @@ namespace DiceGame
             Console.WriteLine($"The result is {RandomValue.Number} + {PlayerInput} = {index} (mod 6).");
             Console.WriteLine($"My trow is {Parameters.ComputerResult}");
         }
+
         public static void ShowWinner(GameParams Parameters)
         {
             if (Parameters.PlayerResult == Parameters.ComputerResult) Console.WriteLine("We have a DRAW!");
             else Console.WriteLine(Parameters.PlayerResult > Parameters.ComputerResult ? $"You win {Parameters.PlayerResult} > {Parameters.ComputerResult}" :
                 $"I win {Parameters.ComputerResult} > {Parameters.PlayerResult}");
         }
+
         public static void ShowHelpInfo()
         {
             var headers = new List<string> { "User dice v" }; 

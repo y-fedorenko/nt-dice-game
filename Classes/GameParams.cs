@@ -39,6 +39,7 @@ namespace DiceGame
             RemainingDices.Remove(RemainingDices[index]);
             return d;
         }
+
         public void ShowWinChancesTable()
         {
             //...
